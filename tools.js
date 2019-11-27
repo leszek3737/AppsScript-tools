@@ -3,37 +3,6 @@ function getTimeFormat(date){
   var timestamp_format = "yyyy-MM-dd HH:mm:ss";
   return Utilities.formatDate(date, timezone, timestamp_format)
 }
-function getSheet(spreadsheet, name){
-  return spreadsheet.getSheetByName(name)
-}
-
-function getSpreadSheet(id){
-  return SpreadsheetApp.openById(id)
-}
-function getValuesRange(sheet, row, col, longRow, longCol){
-  if(longRow){
-    return sheet.getRange(row, col, longRow, longCol).getValues()
-  } else {
-    return sheet.getRange(row, col).getValue()
-  }
-}
-function getValuesRangeFromOneRow(sheet, row, col){
-  var date =[]
-  for (var i = 0; i < col.length; i++) { 
-    date.push(getValuesRange(sheet, row, col[i]))
-  }
-    return date
-}
-
-
-function setValuesRange(data, sheet, row, col, longRow, longCol){
-  if(longRow){
-    return sheet.getRange(row, col, longRow, longCol).setValues(data)
-  } else {
-    return sheet.getRange(row, col).setValue(data)
-  }
-}
-
 
 function twoDimensionalArrayToOne(data){
   var dataReturn = []
@@ -48,28 +17,6 @@ function indexOf(array1, array2){
     arrayReturn[i] = array2.indexOf(array1[i])      
   }
   return arrayReturn
-}
-
-function clearValuesRange(sheet, row, col, longRow, longCol){
-  if(longRow){
-    return sheet.getRange(row, col, longRow, longCol).clear()
-  } else {
-    return sheet.getRange(row, col).clear()
-  }
-}
-function clearSheet(sheet, config){
-  sheet.getRange(config.rowStart, config.colStart, sheet.getLastRow(), sheet.getLastColumn()).clear();
-}
-
-function appendRows(data, sheet){
-  for (var i = 0; i < data.length; i++) {
-    sheet.appendRow(data[i])
-  }
-}
-function appendRowByIndexToSheet(data, index, sheet){
-  for (var i = 0; i < index.length; i++) {
-    sheet.appendRow(data[index[i]])
-  }
 }
 
 function dayInMiliSec(day){
@@ -123,9 +70,6 @@ function getBodyMail(template, data){
   return template.evaluate().getBlob().getDataAsString();
 }
 
-function addDataToSheet(sheet, config, data){
-  sheet.getRange(config.rowStart, config.colStart,  data.length , data[0].length).setValues(data)
-}
 
 //function pasteData(data, spreadsheet, configRegion){
 //  var sheet = getSheet(spreadsheet, configRegion.name)
